@@ -334,10 +334,11 @@ export default function PixelBoard() {
     setSelectedColor(color);
     if (selectedPixel) {
       const key = `${selectedPixel.x},${selectedPixel.y}`;
-
+      const injectedWallet = walelts.wallets.find(
+        (wallet) => wallet.connectorType === "injected"
+      );
       if (isOnchain) {
-        console.log(walelts);
-        await walelts.wallets[0].switchChain(monadTestnet.id);
+        await injectedWallet!.switchChain(monadTestnet.id);
         const data = encodeFunctionData({
           abi: CONTRACT_ABI,
           functionName: "placePixel",
@@ -353,7 +354,7 @@ export default function PixelBoard() {
               to: CONTRACT_ADDRESS,
               data,
             },
-            { address: walelts.wallets[0].address }
+            { address: injectedWallet!.address }
           );
           const shortHash = `${hash.hash.slice(0, 6)}...${hash.hash.slice(-4)}`;
           setPixelUpdates({ ...pixelUpdates, [key]: color });
@@ -376,9 +377,11 @@ export default function PixelBoard() {
       functionName: "bombs",
       args: [walelts.wallets[0].address as `0x${string}`],
     });
-    console.log(bombCount);
+    const injectedWallet = walelts.wallets.find(
+      (wallet) => wallet.connectorType === "injected"
+    );
     if (Number(bombCount) > 0 && selectedPixel) {
-      await walelts.wallets[0].switchChain(monadTestnet.id);
+      await injectedWallet!.switchChain(monadTestnet.id);
       const data = encodeFunctionData({
         abi: CONTRACT_ABI,
         functionName: "bombArea",
@@ -390,7 +393,7 @@ export default function PixelBoard() {
             to: CONTRACT_ADDRESS,
             data,
           },
-          { address: walelts.wallets[0].address }
+          { address: injectedWallet!.address }
         );
         setTimeout(() => {
           const updates: Record<string, string> = {};
@@ -418,7 +421,10 @@ export default function PixelBoard() {
   };
   const handleBuyBomb = async () => {
     if (!walelts.ready) return;
-    await walelts.wallets[0].switchChain(monadTestnet.id);
+    const injectedWallet = walelts.wallets.find(
+      (wallet) => wallet.connectorType === "injected"
+    );
+    await injectedWallet!.switchChain(monadTestnet.id);
     const price: bigint = await client.readContract({
       address: CONTRACT_ADDRESS,
       abi: CONTRACT_ABI,
@@ -436,7 +442,7 @@ export default function PixelBoard() {
           value: price,
           data,
         },
-        { address: walelts.wallets[0].address }
+        { address: injectedWallet!.address }
       );
       const shortHash = `${hash.hash.slice(0, 6)}...${hash.hash.slice(-4)}`;
       setToast({ message: `Buy BOOM tx: ${shortHash}`, type: "success" });
