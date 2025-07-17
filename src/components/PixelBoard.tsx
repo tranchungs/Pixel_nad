@@ -336,6 +336,7 @@ export default function PixelBoard() {
       const key = `${selectedPixel.x},${selectedPixel.y}`;
 
       if (isOnchain) {
+        console.log(walelts);
         await walelts.wallets[0].switchChain(monadTestnet.id);
         const data = encodeFunctionData({
           abi: CONTRACT_ABI,
