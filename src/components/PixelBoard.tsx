@@ -371,15 +371,16 @@ export default function PixelBoard() {
     }
   };
   const handleThrowBoom = async () => {
+    const injectedWallet = walelts.wallets.find(
+      (wallet) => wallet.connectorType === "injected"
+    );
     const bombCount = await client.readContract({
       address: CONTRACT_ADDRESS,
       abi: CONTRACT_ABI,
       functionName: "bombs",
-      args: [walelts.wallets[0].address as `0x${string}`],
+      args: [injectedWallet!.address as `0x${string}`],
     });
-    const injectedWallet = walelts.wallets.find(
-      (wallet) => wallet.connectorType === "injected"
-    );
+
     if (Number(bombCount) > 0 && selectedPixel) {
       await injectedWallet!.switchChain(monadTestnet.id);
       const data = encodeFunctionData({

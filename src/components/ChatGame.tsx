@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Chat } from "react-together";
+import { Chat, useNicknames } from "react-together";
 import { MessageSquare, X } from "lucide-react";
-import { useNicknames } from "react-together";
 import { useWallets } from "@privy-io/react-auth";
 
 export default function ChatGame() {
@@ -21,20 +20,20 @@ export default function ChatGame() {
   return (
     <div className="relative">
       {/* Toggle Button */}
-      <div className="fixed bottom-4 left-4 z-50">
+      <div className="flex justify-center mt-2">
         <button
           onClick={() => setOpen(!open)}
-          className="p-3 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white shadow-xl transition"
+          className="p-2 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white shadow-md transition"
         >
-          {open ? <X size={22} /> : <MessageSquare size={22} />}
+          {open ? <X size={20} /> : <MessageSquare size={20} />}
         </button>
       </div>
 
-      {/* Chat Panel */}
+      {/* Chat Popup (beside canvas) */}
       {open && (
-        <div className="fixed bottom-20 left-4 w-80 h-[500px] bg-zinc-900 rounded-2xl shadow-2xl z-50 border border-zinc-700 flex flex-col overflow-hidden">
+        <div className="absolute left-[110%] top-0 w-80 h-[500px] bg-zinc-900 rounded-xl shadow-xl z-40 flex flex-col border border-zinc-700 overflow-hidden">
           {/* Header */}
-          <div className="bg-zinc-800 px-4 py-3 flex items-center justify-between border-b border-zinc-700">
+          <div className="bg-zinc-800 px-4 py-2 flex items-center justify-between border-b border-zinc-700">
             <span className="text-sm font-semibold text-white">Team Chat</span>
             <button
               onClick={() => setOpen(false)}
