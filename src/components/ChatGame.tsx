@@ -31,7 +31,7 @@ export default function ChatGame() {
 
       {/* Chat Popup */}
       {open && (
-        <div className="absolute left-[110%] top-0 w-80 h-[400px] bg-zinc-900 rounded-xl shadow-2xl z-50 flex flex-col overflow-hidden border border-zinc-700">
+        <div className="absolute left-[110%] top-0 w-80 h-[800px] bg-zinc-900 rounded-xl shadow-2xl z-50 flex flex-col overflow-hidden border border-zinc-700">
           {/* Header */}
           <div className="bg-zinc-800 px-4 py-2 border-b border-zinc-700 flex items-center justify-between">
             <span className="text-sm font-semibold text-white">Team Chat</span>
