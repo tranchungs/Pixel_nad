@@ -23,9 +23,14 @@ class PinataService {
   private pinata: PinataSDK;
 
   constructor(jwt?: string, gateway?: string) {
-    const pinataJWT = jwt || process.env.NEXT_PUBLIC_PINATA_JWT || "";
+    const pinataJWT =
+      jwt ||
+      process.env.NEXT_PUBLIC_PINATA_JWT ||
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJkMDYxN2JkYy1mNGM3LTQ1NWUtYTk3Ny1iYTE3NTcwODFhOTUiLCJlbWFpbCI6InRyYW5jaHVuZzJrQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI5YWFiZGZjNTEyMjM4OGVhN2U2NCIsInNjb3BlZEtleVNlY3JldCI6IjM4MzNjZmM0MTM5M2UzNGNlYjQzMzM3YjE4ZGJlNzljYmUwZDVmODUwY2Y3MTRmMWEyOTlhNGM1NjMxZjIwNmQiLCJleHAiOjE3ODQ0NTk5Nzh9.0XFKpt3_Fc7VeA-zZNc-aA6zQJ1ou3OFTEUuJlXcTr8";
     const pinataGateway =
-      gateway || process.env.NEXT_PUBLIC_PINATA_GATEWAY || "";
+      gateway ||
+      process.env.NEXT_PUBLIC_PINATA_GATEWAY ||
+      "emerald-occasional-canid-859.mypinata.cloud";
 
     if (!pinataJWT) {
       throw new Error("Pinata JWT token is required");
